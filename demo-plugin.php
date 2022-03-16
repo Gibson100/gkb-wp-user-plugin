@@ -32,7 +32,7 @@ add_action( 'admin_menu', 'add_employees_admin_menu' );
 
 function gkblabs_employees_main_menu()
 {
-  
+  require_once "add_employee.php";
 }
 
 
