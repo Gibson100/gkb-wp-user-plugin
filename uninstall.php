@@ -14,4 +14,4 @@
  // Access the database
  global $wpdb;
 
- $wpdb->query( "delete table wp_employees_gkblabs" );
+ $wpdb->query( "DROP TABLE IF EXISTS wp_employees_gkblabs" );
