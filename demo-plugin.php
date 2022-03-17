@@ -48,11 +48,12 @@ function gkblabs_employees_main_menu()
 function wp_gkblabs_import_users()
 {
   echo 'import users';
+
 }
 
 function wp_gkblabs_list_users()
 {
-  echo 'list users';
+  require_once "list_employees.php";
 }
 
 
