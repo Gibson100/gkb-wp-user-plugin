@@ -1,6 +1,3 @@
-<!-- Page to add a new employee -->
-
-<!-- The Modal -->
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -71,6 +68,7 @@
             </div>
         </div>
     </div>
+</div>
 
 <script>
 imgInp.onchange = evt => {

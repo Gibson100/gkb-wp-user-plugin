@@ -1,6 +1,4 @@
-
-<div class="container mt-3">
-  <h2>All Employees</h2>         
+<div class="container mt-3">      
   <table class="table table-dark">
     <thead>
       <tr>
@@ -17,35 +15,36 @@
     </thead>
     <tbody>
     <?php
-    include_once "edit_employee.php";
     global $wpdb;
 
-    $results = $wpdb->get_results("SELECT * FROM `wp_gkblabs_employees`");
+    //$path = str_replace('\\', '/', $path);
 
-    foreach($results as $result)
-    {
-        echo "
+    // $folder = plugin_dir_path( __FILE__ ) .'assets/images' . '/';
+
+    $url = plugin_dir_url(__FILE__) . 'assets/images/';
+
+    // print_r($url);
+
+    // die;
+
+    $results = $wpdb->get_results("SELECT * FROM `wp_gkblabs_employees`");
+    ?>
+
+    <?php foreach($results as $result) : ?>
         <tr>
-            <td><img class='w-25' src='/' alt=''></td>
-            <td>$result->id</td>
-            <td>$result->FirstName</td>
-            <td>$result->LastName</td>
-            <td>$result->Email</td>
-            <td>$result->Hobbies</td>
-            <td>$result->Gender</td>
+            <td><img class='bg-info rounded-circle' style='border-radius: 50%;width: 60px;height:60px' src="<?php echo $url . $result->Image ?>" alt=''></td>
+            <td><?php echo $result->id ?></td>
+            <td><?php echo $result->FirstName ?></td>
+            <td><?php echo $result->LastName ?></td>
+            <td><?php echo $result->Email ?></td>
+            <td><?php echo $result->Hobbies ?></td>
+            <td><?php echo $result->Gender ?></td>
             <td><a href='/' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#myModal'>Edit</a></td>
             <td><a href='javascript:void' class='btn btn-danger' id='deletebtn'>Delete</a></td>
-        </tr>";
-    }
-      ?>
+        </tr>
+    <?php endforeach;?>
     </tbody>  
   </table>
 </div>
 
-
-<script>
-
-    document.getElementById("deletebtn").addEventListener("click", function() {
-        if(confirm('Are you sure you want to delete this item?') == true){ window.location.href = "/" };
-    })
-</script>
+<?php include_once "edit_employee.php" ?>

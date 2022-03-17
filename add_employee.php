@@ -29,11 +29,9 @@ if ($_REQUEST['page'] === 'gkblabs-create-user'    && !empty($_REQUEST['fname'])
         $filename = $_FILES["profile"]["name"];
         $tempname = $_FILES["profile"]["tmp_name"]; 
         
-        $url = plugin_dir_path(__FILE__);
+        $path = plugin_dir_path(__FILE__);
 
-        $folder = $url.'assets/images/'.$filename;
-
-        //$folder = "/assets/images/".$filename;
+        $folder = $path.'assets/images/'.$filename;
 
         //die($folder);
 

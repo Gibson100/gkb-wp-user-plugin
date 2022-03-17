@@ -15,7 +15,7 @@ function wp_gkblabs_activate()
   `Email` varchar(200) DEFAULT '1',
   `Hobbies` varchar(200) NOT NULL,
   `Gender` varchar(10) NOT NULL,
-  `Image` varchar(255) DEFAULT 'no image',
+  `Image` varchar(255) DEFAULT 'no image.png',
   PRIMARY KEY(id)
   ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
   ";
