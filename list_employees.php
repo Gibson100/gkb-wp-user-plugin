@@ -1,3 +1,5 @@
+<?php include_once "edit_employee.php" ?>
+
 <div class="container mt-3">      
   <table class="table table-dark">
     <thead>
@@ -23,11 +25,15 @@
 
     $url = plugin_dir_url(__FILE__) . 'assets/images/';
 
-    // print_r($url);
+    // QUERY HERE TO COUNT TOTAL RECORDS FOR PAGINATION 
+    $total = $wpdb->get_var("SELECT COUNT(*) FROM `wp_gkblabs_employees`");
+    $user_per_page = 3;
+    $page = isset( $_GET['cpage'] ) ? abs( (int) $_GET['cpage'] ) : 1;
+    $offset = ( $page * $user_per_page ) - $user_per_page;
 
-    // die;
+    // QUERY HERE TO GET OUR RESULTS
+    $results = $wpdb->get_results("SELECT * FROM `wp_gkblabs_employees` LIMIT $user_per_page OFFSET $offset");
 
-    $results = $wpdb->get_results("SELECT * FROM `wp_gkblabs_employees`");
     ?>
 
     <?php foreach($results as $result) : ?>
@@ -40,11 +46,47 @@
             <td><?php echo $result->Hobbies ?></td>
             <td><?php echo $result->Gender ?></td>
             <td><a href='/' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#myModal'>Edit</a></td>
-            <td><a href='javascript:void' class='btn btn-danger' id='deletebtn'>Delete</a></td>
+            <td><a href='/delete/' class='btn btn-danger' onclick="return confirm('Are you sure you want to delete <?php echo $result->FirstName .' '. $result->LastName ?>?')">Delete</a></td>
         </tr>
     <?php endforeach;?>
     </tbody>  
   </table>
-</div>
 
-<?php include_once "edit_employee.php" ?>
+<!-- pagination -->
+<?php 
+echo '<div class="pagination inline">';
+echo paginate_links( array(
+'base' => add_query_arg( 'cpage', '%#%' ),
+'format' => '',
+'prev_text' => __('&laquo;'),
+'next_text' => __('&raquo;'),
+'total' => ceil($total / $user_per_page),
+'current' => $page,
+'type' => 'list'
+));
+echo '</div>';
+?>
+
+<style>  
+  .pagination{
+    float: right;
+  }            
+  .pagination a {   
+      font-weight:bold;   
+      font-size:18px;   
+      color: black;      
+      padding: 8px 16px;   
+      text-decoration: none;   
+      border:1px solid black;
+   
+  }   
+  .pagination a.active {   
+      background-color: pink;   
+  }   
+  .pagination a:hover:not(.active) {   
+      background-color: skyblue;   
+  }  
+  .page-numbers > li {
+    display: inline-block;
+  }
+</style>
