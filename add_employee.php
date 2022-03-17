@@ -16,7 +16,8 @@ if ($_REQUEST['page'] === 'gkblabs-create-user'    && !empty($_REQUEST['fname'])
 
     global $wpdb;
 
-    if (empty($_REQUEST['file']))
+    // check if user has sent an image
+    if (empty($_FILES))
     {
         $wpdb->query("INSERT INTO `wp_gkblabs_employees` (`id`, `FirstName`, `LastName`, `Email`, `Hobbies`, `Gender`, `Image`) VALUES (NULL, '$fname', '$lname', '$email', '$hobbies', '$gender', 'no image')");
     }
@@ -28,10 +29,14 @@ if ($_REQUEST['page'] === 'gkblabs-create-user'    && !empty($_REQUEST['fname'])
         $filename = $_FILES["profile"]["name"];
         $tempname = $_FILES["profile"]["tmp_name"]; 
         
+        $url = plugin_dir_path(__FILE__);
 
-        $folder = plugin_dir_url('assets\images').$filename;
+        $folder = $url.'assets/images/'.$filename;
 
-            
+        //$folder = "/assets/images/".$filename;
+
+        //die($folder);
+
         // Now let's move the uploaded image into the folder: image
         if (move_uploaded_file($tempname, $folder))  {
             // Execute query
@@ -97,21 +102,22 @@ if ($_REQUEST['page'] === 'gkblabs-create-user'    && !empty($_REQUEST['fname'])
             value="Female">Female
         <label class="form-check-label" for="radio2"></label>
     </div>
-    upload Profile
-    <input accept="image/*" type='file' id="imgInp" name="profile" />
-    <img class="w-50" id="blah" src="#" />
-    <div class="mt-2">
-        <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="mb-3">
+        <label for="imgInp" class="form-label">upload Profile:</label>
+        <input accept="image/*" type='file' id="imgInp" name="profile" />
+        <img class="w-25" id="blah" src="#" />
+        <div>
     </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 </div>
 
-    <script>
-    imgInp.onchange = evt => {
-        const [file] = imgInp.files
-        if (file) {
-            blah.src = URL.createObjectURL(file)
-        }
+<script>
+imgInp.onchange = evt => {
+    const [file] = imgInp.files
+    if (file) {
+        blah.src = URL.createObjectURL(file)
     }
-    </script>
+}
+</script>

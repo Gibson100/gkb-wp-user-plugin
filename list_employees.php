@@ -1,3 +1,4 @@
+
 <div class="container mt-3">
   <h2>All Employees</h2>         
   <table class="table table-dark">
@@ -16,6 +17,7 @@
     </thead>
     <tbody>
     <?php
+    include_once "edit_employee.php";
     global $wpdb;
 
     $results = $wpdb->get_results("SELECT * FROM `wp_gkblabs_employees`");
@@ -31,11 +33,19 @@
             <td>$result->Email</td>
             <td>$result->Hobbies</td>
             <td>$result->Gender</td>
-            <td><a href='/' class='btn btn-primary'>Edit</a></td>
-            <td><a href='/' class='btn btn-danger'>Delete</a></td>
+            <td><a href='/' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#myModal'>Edit</a></td>
+            <td><a href='javascript:void' class='btn btn-danger' id='deletebtn'>Delete</a></td>
         </tr>";
     }
       ?>
     </tbody>  
   </table>
 </div>
+
+
+<script>
+
+    document.getElementById("deletebtn").addEventListener("click", function() {
+        if(confirm('Are you sure you want to delete this item?') == true){ window.location.href = "/" };
+    })
+</script>
