@@ -13,9 +13,11 @@ Author URI: https://gkblabs.com/
 
 defined('ABSPATH') or die('page not available');
 
-require_once "inc/gkblabs_wp_demo_plugin_activate.php";
+include "inc/gkblabs_wp_demo_plugin_activate.php";
 register_activation_hook( __FILE__, 'wp_gkblabs_activate' );
-require_once "inc/gkblabs_wp_demo_plugin_deactivate.php";
+
+
+include "inc/gkblabs_wp_demo_plugin_deactivate.php";
 register_deactivation_hook( __FILE__, 'wp_gkblabs_deactivate' );
 include 'styles.php'; 
 
@@ -23,7 +25,15 @@ include 'styles.php';
 // add icon to the admin menu
 function add_employees_admin_menu()
 {
-  add_menu_page( 'Employees', 'gtblabs employees', 'manage_options', 'employees-management-menu', 'gkblabs_employees_main_menu', 'dashicons-buddicons-buddypress-logo', 2 );
+
+
+  add_menu_page('demo-plugin', 'demo-plugin', 'manage_options', 'gkblabs-create-user','gkblabs_employees_main_menu');
+  add_submenu_page( 'gkblabs-create-user', 'Create User', 'Create User',
+      'manage_options', 'gkblabs-create-user','gkblabs_employees_main_menu');
+  add_submenu_page( 'gkblabs-create-user', 'Import Users', 'Import Users',
+      'manage_options', 'import-users', 'wp_gkblabs_import_users');
+  add_submenu_page( 'gkblabs-create-user', 'List Users', 'List users',
+  'manage_options', 'list-users', 'wp_gkblabs_list_users');
 }
 
 add_action( 'admin_menu', 'add_employees_admin_menu' );
@@ -33,6 +43,16 @@ add_action( 'admin_menu', 'add_employees_admin_menu' );
 function gkblabs_employees_main_menu()
 {
   require_once "add_employee.php";
+}
+
+function wp_gkblabs_import_users()
+{
+  echo 'import users';
+}
+
+function wp_gkblabs_list_users()
+{
+  echo 'list users';
 }
 
 

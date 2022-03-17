@@ -1,10 +1,31 @@
 <?php
 
-if (isset($_POST['fname']))
+if ($_REQUEST['page'] === 'gkblabs-create-user'    && !empty($_REQUEST['fname']) && !empty($_REQUEST['lname']) && !empty($_REQUEST['email']) && !empty($_REQUEST['gender']))
 {
-    print_r($_REQUEST);
-}
+    if (empty($_REQUEST['hobbies']))
+    {
+        echo "<script>alert('atleast 1 hobbie should be selected')</script>";
+        return; 
+    }
 
+    $fname = htmlentities($_REQUEST['fname']);
+    $lname = htmlentities($_REQUEST['lname']);
+    $email = htmlentities($_REQUEST['email']);
+    $gender = htmlentities($_REQUEST['gender']);
+    $hobbies = implode(',',$_REQUEST['hobbies']); //convert array into string 
+
+    if (empty($_REQUEST['file']))
+    {
+        global $wpdb;
+
+        $wpdb->query("");
+    }
+    else
+    {
+        echo "<script>alert('image')</script>";
+    }
+    
+}
 ?>
 
 <!-- Page to add a new employee -->
@@ -25,7 +46,7 @@ if (isset($_POST['fname']))
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="<?php __FILE__?>" method="post">
+                <form action="<?php $_PHP_SELF ?>" method="post">
                     <div class="mb-3 mt-3">
                         <label for="name" class="form-label">First Name:</label>
                         <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname"
@@ -43,19 +64,19 @@ if (isset($_POST['fname']))
                     </div>
                     Hobbies
                     <div class="form-check">
-                        <input class="form-check-input mt-1" type="checkbox" id="check1" name="tv" value="TV">
+                        <input class="form-check-input mt-1" type="checkbox" id="check1" name="hobbies[]" value="TV">
                         <label class="form-check-label">TV</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input mt-1" type="checkbox" id="check2" name="reading" value="Reading">
+                        <input class="form-check-input mt-1" type="checkbox" id="check2" name="hobbies[]" value="Reading">
                         <label class="form-check-label">Reading</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input mt-1" type="checkbox" id="check1" name="coding" value="Coding">
+                        <input class="form-check-input mt-1" type="checkbox" id="check1" name="hobbies[]" value="Coding">
                         <label class="form-check-label">Coding</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input mt-1" type="checkbox" id="check1" name="skiing" value="Skiing">
+                        <input class="form-check-input mt-1" type="checkbox" id="check1" name="hobbies[]" value="Skiing">
                         <label class="form-check-label">Skiing</label>
                     </div>
                     Gender
@@ -70,7 +91,7 @@ if (isset($_POST['fname']))
                         <label class="form-check-label" for="radio2"></label>
                     </div>
                     upload Profile
-                    <input accept="image/*" type='file' id="imgInp" />
+                    <input accept="image/*" type='file' id="imgInp" name="file" />
                     <img class="w-50" id="blah" src="#" />
 
                     <!-- Modal footer -->
