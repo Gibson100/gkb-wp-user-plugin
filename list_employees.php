@@ -1,4 +1,7 @@
-<?php require "edit_employee.php"; ?>
+<?php 
+require "edit_employee.php"; 
+require "delete_employee.php";
+?>
 <div class="container mt-3">      
   <table class="table table-dark">
     <thead>
@@ -23,7 +26,7 @@
     // $folder = plugin_dir_path( __FILE__ ) .'assets/images' . '/';
 
     $url = plugin_dir_url(__FILE__) . 'assets/images/';
-    $edit_page_url = get_site_url() . '/wp-admin/admin.php';
+    $page_url = get_site_url() . '/wp-admin/admin.php';
 
     // print_r($edit_page_url);
 
@@ -31,7 +34,7 @@
 
     // QUERY HERE TO COUNT TOTAL RECORDS FOR PAGINATION 
     $total = $wpdb->get_var("SELECT COUNT(*) FROM `wp_gkblabs_employees`");
-    $user_per_page = 3;
+    $user_per_page = 5;
     $page = isset( $_GET['cpage'] ) ? abs( (int) $_GET['cpage'] ) : 1;
     $offset = ( $page * $user_per_page ) - $user_per_page;
 
@@ -49,8 +52,8 @@
             <td><?php echo $result->Email ?></td>
             <td><?php echo $result->Hobbies ?></td>
             <td><?php echo $result->Gender ?></td>
-            <td><a href="<?=$edit_page_url?>?page=list-users&id=<?= $result->id ?> ?>" class='btn btn-primary'>Edit</a></td>
-            <td><a href='/delete/' class='btn btn-danger' onclick="return confirm('Are you sure you want to delete <?php echo $result->FirstName .' '. $result->LastName ?>?')">Delete</a></td>
+            <td><a href="<?=$page_url?>?page=list-users&id=<?= $result->id ?>" class='btn btn-primary'>Edit</a></td>
+            <td><a href='<?=$page_url?>?page=list-users&delete_id=<?= $result->id ?>' class='btn btn-danger' onclick="return confirm('Are you sure you want to delete <?php echo $result->FirstName .' '. $result->LastName ?>?')">Delete</a></td>
         </tr>
     <?php endforeach;?>
     </tbody>  
