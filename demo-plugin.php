@@ -47,8 +47,7 @@ function gkblabs_employees_main_menu()
 
 function wp_gkblabs_import_users()
 {
-  echo 'import users';
-
+  require_once('import_users.php');
 }
 
 function wp_gkblabs_list_users()
