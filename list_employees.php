@@ -1,5 +1,4 @@
-<?php include_once "edit_employee.php" ?>
-
+<?php require "edit_employee.php"; ?>
 <div class="container mt-3">      
   <table class="table table-dark">
     <thead>
@@ -24,6 +23,11 @@
     // $folder = plugin_dir_path( __FILE__ ) .'assets/images' . '/';
 
     $url = plugin_dir_url(__FILE__) . 'assets/images/';
+    $edit_page_url = get_site_url() . '/wp-admin/admin.php';
+
+    // print_r($edit_page_url);
+
+    // die;
 
     // QUERY HERE TO COUNT TOTAL RECORDS FOR PAGINATION 
     $total = $wpdb->get_var("SELECT COUNT(*) FROM `wp_gkblabs_employees`");
@@ -45,7 +49,7 @@
             <td><?php echo $result->Email ?></td>
             <td><?php echo $result->Hobbies ?></td>
             <td><?php echo $result->Gender ?></td>
-            <td><a href='/' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#myModal'>Edit</a></td>
+            <td><a href="<?=$edit_page_url?>?page=list-users&id=<?= $result->id ?> ?>" class='btn btn-primary'>Edit</a></td>
             <td><a href='/delete/' class='btn btn-danger' onclick="return confirm('Are you sure you want to delete <?php echo $result->FirstName .' '. $result->LastName ?>?')">Delete</a></td>
         </tr>
     <?php endforeach;?>
@@ -54,7 +58,7 @@
 
 <!-- pagination -->
 <?php 
-echo '<div class="pagination inline">';
+echo '<div class="pagination">';
 echo paginate_links( array(
 'base' => add_query_arg( 'cpage', '%#%' ),
 'format' => '',
@@ -90,3 +94,5 @@ echo '</div>';
     display: inline-block;
   }
 </style>
+
+
