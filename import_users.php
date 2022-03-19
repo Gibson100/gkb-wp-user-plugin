@@ -18,19 +18,21 @@ if ($_REQUEST['page'] === 'import-users' && isset($_POST['submit']))
             }
             try
             {
+                if (!isset($column[3]))
+                {
                     $wpdb->query("INSERT INTO `wp_gkblabs_employees` (`id`, `FirstName`, `LastName`, `Email`) VALUES (NULL, '$column[0]', '$column[1]', '$column[2]')");
                     $count ++;
-              
-                // else if(!array_key_exists(4,$column))
-                // {
-                //     $wpdb->query("INSERT INTO `wp_gkblabs_employees` (`id`, `FirstName`, `LastName`, `Email`, `Hobbies`) VALUES (NULL, '$column[0]', '$column[1]', '$column[2]', '$column[3]')");
-                //     $count ++;
-                // }
-                // else
-                // {
-                //     $wpdb->query("INSERT INTO `wp_gkblabs_employees` (`id`, `FirstName`, `LastName`, `Email`, `Hobbies`, `Gender`) VALUES (NULL, '$column[0]', '$column[1]', '$column[2]', '$column[3]', '$column[4]')");
-                //     $count ++;
-                // }
+                } 
+                else if(!isset($column[4]))
+                {
+                    $wpdb->query("INSERT INTO `wp_gkblabs_employees` (`id`, `FirstName`, `LastName`, `Email`, `Hobbies`) VALUES (NULL, '$column[0]', '$column[1]', '$column[2]', '$column[3]')");
+                    $count ++;
+                }
+                else
+                {
+                    $wpdb->query("INSERT INTO `wp_gkblabs_employees` (`id`, `FirstName`, `LastName`, `Email`, `Hobbies`, `Gender`) VALUES (NULL, '$column[0]', '$column[1]', '$column[2]', '$column[3]', '$column[4]')");
+                    $count ++;
+                }
             }
             catch(Exception $ex)
             {
