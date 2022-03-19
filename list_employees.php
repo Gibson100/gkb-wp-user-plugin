@@ -2,23 +2,8 @@
 require "edit_employee.php"; 
 require "delete_employee.php";
 ?>
-<div class="container mt-3">      
-  <table class="table table-dark">
-    <thead>
-      <tr>
-        <th>Image</th>
-        <th>ID</th>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-        <th>Hobbies</th>
-        <th>Gender</th>
-        <th>Edit</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-    <?php
+
+<?php
     global $wpdb;
 
     //$path = str_replace('\\', '/', $path);
@@ -41,7 +26,26 @@ require "delete_employee.php";
     // QUERY HERE TO GET OUR RESULTS
     $results = $wpdb->get_results("SELECT * FROM `wp_gkblabs_employees` LIMIT $user_per_page OFFSET $offset");
 
-    ?>
+
+  if ($results) : 
+?>
+
+<div class="container mt-3">      
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>ID</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Hobbies</th>
+        <th>Gender</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
 
     <?php foreach($results as $result) : ?>
         <tr>
@@ -97,5 +101,9 @@ echo '</div>';
     display: inline-block;
   }
 </style>
-
+<?php 
+  else : 
+    echo 'No data is available in the database';
+  endif;
+?>
 
