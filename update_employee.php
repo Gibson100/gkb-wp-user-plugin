@@ -36,14 +36,18 @@ if ($_REQUEST['page'] === 'list-users' && !empty($_REQUEST['fname']) && !empty($
         
         $path = plugin_dir_path(__FILE__);
 
-        $folder = $path.'assets/images/'.$filename;
+        $temp = explode(".", $filename);
+        $newfilename = round(microtime(true)) . '.' . end($temp);
+
+        $folder = $path.'assets/images/'.$newfilename;
+
 
         //die($folder);
 
         // Now let's move the uploaded image into the folder: image
         if (move_uploaded_file($tempname, $folder))  {
             // Execute query to update
-            $wpdb->query("UPDATE `wp_gkblabs_employees` SET `FirstName` = '$fname', `LastName` = '$lname', `Email` = '$email', `Hobbies` = '$hobbies', `Gender` = '$gender', `Image` = '$filename' WHERE `id` = '$id'");
+            $wpdb->query("UPDATE `wp_gkblabs_employees` SET `FirstName` = '$fname', `LastName` = '$lname', `Email` = '$email', `Hobbies` = '$hobbies', `Gender` = '$gender', `Image` = '$newfilename' WHERE `id` = '$id'");
         }
         else
         {
@@ -52,7 +56,7 @@ if ($_REQUEST['page'] === 'list-users' && !empty($_REQUEST['fname']) && !empty($
 
     }
 
-    echo "<script>alert('Successfully added user')</script>";
+    echo "<script>alert('Successfully updated user')</script>";
 
     // redirect the user to list page
     echo "<script>window.location.replace('?page=list-users')</script>";

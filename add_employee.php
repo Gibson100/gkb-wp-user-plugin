@@ -31,14 +31,16 @@ if ($_REQUEST['page'] === 'gkblabs-create-user'    && !empty($_REQUEST['fname'])
         
         $path = plugin_dir_path(__FILE__);
 
-        $folder = $path.'assets/images/'.$filename;
 
-        //die($folder);
+        $temp = explode(".", $filename);
+        $newfilename = round(microtime(true)) . '.' . end($temp);
+
+        $folder = $path.'assets/images/'.$newfilename;
 
         // Now let's move the uploaded image into the folder: image
         if (move_uploaded_file($tempname, $folder))  {
             // Execute query
-            $wpdb->query("INSERT INTO `wp_gkblabs_employees` (`id`, `FirstName`, `LastName`, `Email`, `Hobbies`, `Gender`, `Image`) VALUES (NULL, '$fname', '$lname', '$email', '$hobbies', '$gender', '$filename')");
+            $wpdb->query("INSERT INTO `wp_gkblabs_employees` (`id`, `FirstName`, `LastName`, `Email`, `Hobbies`, `Gender`, `Image`) VALUES (NULL, '$fname', '$lname', '$email', '$hobbies', '$gender', '$newfilename')");
         }
         else
         {

@@ -9,6 +9,7 @@ require_once "update_employee.php";
         // begin the update process
         $id = $_GET['id'];
         $url = plugin_dir_url(__FILE__) . 'assets/images/';
+        
 
         // get the data from the database 
         global $wpdb;
