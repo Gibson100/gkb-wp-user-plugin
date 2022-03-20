@@ -17,11 +17,11 @@ if ($_REQUEST['page'] === 'gkblabs-create-user'    && !empty($_REQUEST['fname'])
     global $wpdb;
 
     // check if user has sent an image
-    if (empty($_FILES))
+    if (($_FILES['profile']['name'] === ''))
     {
-        $wpdb->query("INSERT INTO `wp_gkblabs_employees` (`id`, `FirstName`, `LastName`, `Email`, `Hobbies`, `Gender`, `Image`) VALUES (NULL, '$fname', '$lname', '$email', '$hobbies', '$gender', 'no image')");
+        $wpdb->query("INSERT INTO `wp_gkblabs_employees` (`id`, `FirstName`, `LastName`, `Email`, `Hobbies`, `Gender`) VALUES (NULL, '$fname', '$lname', '$email', '$hobbies', '$gender')");
     }
-    else
+    else 
     {
         //handle image 
         // If request contains a file ...

@@ -56,7 +56,7 @@ require_once "update_employee.php";
                         <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" value="<?=$result->Email?>"
                             required>
                     </div>
-                    <?php $hobbies = explode(',',$result->Hobbies) ?>
+                    <?php $hobbies = explode(',',$result->Hobbies) // make strings into array ?>
                     Hobbies
                     <div class="form-check">
                         <input class="form-check-input mt-1" type="checkbox" id="check1" name="hobbies[]" value="TV" <?php if(in_array('TV',$hobbies)){echo 'checked';}?>>
