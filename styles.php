@@ -22,11 +22,12 @@
 
  wp_enqueue_script( 'j-query', 'https://code.jquery.com/jquery-3.6.0.min.js' );
 
+ wp_enqueue_script( 'j-query-validator', 'https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js' );
+
  wp_enqueue_script( 'bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js' );
 
  wp_enqueue_script( 'j-query-datatable-js', 'https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js' );
 
- wp_enqueue_script( 'j-query-validator', 'https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js' );
 
 
     

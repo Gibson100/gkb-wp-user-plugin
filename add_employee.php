@@ -61,12 +61,11 @@ if ($_REQUEST['page'] === 'gkblabs-create-user'    && !empty($_REQUEST['fname'])
 <form action="<?php $_PHP_SELF ?>" method="post" enctype="multipart/form-data" id="form">
     <div class="mb-3 mt-3">
         <label for="name" class="form-label">First Name: <span class="error">*<span></label>
-        <input type="text" class="form-control w-50" id="fname" placeholder="Enter First Name" name="fname"
-            min="2" required>
+        <input type="text" class="form-control w-50" id="fname" placeholder="Enter First Name" name="fname"  required>
     </div>
     <div class="mb-3">
         <label for="lname" class="form-label">Last Name: <span class="error">*<span></label>
-        <input type="text" class="form-control w-50" id="lname" placeholder="Enter Lastname" name="lname" min="2"
+        <input type="text" class="form-control w-50" id="lname" placeholder="Enter Lastname" name="lname"
             required>
     </div>
     <div class="mb-3">
@@ -115,6 +114,7 @@ if ($_REQUEST['page'] === 'gkblabs-create-user'    && !empty($_REQUEST['fname'])
 <style>
   .error{
         color: red;
+        font-size: 20px;
     }
 </style>
 
@@ -130,25 +130,23 @@ imgInp.onchange = evt => {
 $(document).ready(function () {
 
 $('#form').validate({ // initialize the plugin
-    rules: {
-        'hobbies[]': {
-            required: true,
-        },
+rules: {
         'fname': {
             required: true,
             minlength: 2,
-            lettersonly: true,
-            maxlength: 255,
         },
+
         'lname': {
-            requied: true,
+            required: true,
             minlength: 2,
-            maxlength: 255,
-            lettersonly: true,
+        },
+    
+        'hobbies[]': {
+            required: true,
+            minlength: 1, // <-- Add this line
         },
         'email': {
             required: true,
-            maxlength: 255,
             minlength: 5,
         },
         'gender': {
@@ -156,25 +154,22 @@ $('#form').validate({ // initialize the plugin
         }
     },
     messages: {
-        'hobbies[]': {
-            required: "You must check at least 1 box",
-            maxlength: "Check no more than {0} boxes"
+        fname: {
+            required: "first name is required",
         },
-        'gender': {
-            required: "Gender is required",
+        lname: {
+            required: "last name is reaquired",
         },
-        'fname': {
-            required: "First name is required",
+        // add single quotes
+        'hobbies[]': "You must check at least 1 box",
+        email: {
+            required: "email is required",
+            email: "Please enter a valid email address.",
         },
-        'lname': {
-            required: "Last name is required",
-        },
-        'email': {
-            required: "email name is required",
-        }
+        'gender': 'Gender is required',
     }
 });
+});
 
-});  
 
 </script>
