@@ -80,7 +80,7 @@ if ($_REQUEST['page'] === 'gkblabs-create-user'    && !empty($_REQUEST['fname'])
         <label class="form-check-label">TV</label>
     </div>
     <div class="form-check">
-        <input class="form-check-input mt-1" type="checkbox" id="check2" name="hobbies[]" value="Reading">
+        <input class="form-check-input mt-1" type="checkbox" id="check1" name="hobbies[]" value="Reading">
         <label class="form-check-label">Reading</label>
     </div>
     <div class="form-check">

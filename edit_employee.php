@@ -34,7 +34,7 @@ require_once "update_employee.php";
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">Add new Employee</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close closebtn" data-bs-dismiss="modal"></button>
             </div>
 
             <!-- Modal body -->
@@ -92,7 +92,7 @@ require_once "update_employee.php";
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger closebtn" data-bs-dismiss="modal">Close</button>
                     </div>
                 </form>
 
@@ -110,5 +110,9 @@ imgInp.onchange = evt => {
         blah.src = URL.createObjectURL(file)
     }
 }
+
+$('.closebtn').click(function(){
+    window.location.replace('?page=list-users') // return the user back if they click cancel while editing a particular employee
+})
         
 </script>

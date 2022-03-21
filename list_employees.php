@@ -18,21 +18,22 @@ require "delete_employee.php";
     // die;
 
     // QUERY HERE TO COUNT TOTAL RECORDS FOR PAGINATION 
-    $total = $wpdb->get_var("SELECT COUNT(*) FROM `wp_gkblabs_employees`");
-    $user_per_page = 5;
-    $page = isset( $_GET['cpage'] ) ? abs( (int) $_GET['cpage'] ) : 1;
-    $offset = ( $page * $user_per_page ) - $user_per_page;
+    // $total = $wpdb->get_var("SELECT COUNT(*) FROM `wp_gkblabs_employees`");
+    // $user_per_page = 5;
+    // $page = isset( $_GET['cpage'] ) ? abs( (int) $_GET['cpage'] ) : 1;
+    // $offset = ( $page * $user_per_page ) - $user_per_page;
 
-    // QUERY HERE TO GET OUR RESULTS
-    $results = $wpdb->get_results("SELECT * FROM `wp_gkblabs_employees` LIMIT $user_per_page OFFSET $offset");
+    // // QUERY HERE TO GET OUR RESULTS
+    // $results = $wpdb->get_results("SELECT * FROM `wp_gkblabs_employees` LIMIT $user_per_page OFFSET $offset");
 
+  $results = $wpdb->get_results("SELECT * FROM `wp_gkblabs_employees`");
 
   if ($results) : 
 ?>
 
 <div class="container mt-3">      
-  <table class="table table-dark">
-    <thead>
+  <table class="table table-dark" id="table_id">
+    <thead class="mt-2">
       <tr>
         <th>Image</th>
         <th>ID</th>
@@ -65,21 +66,29 @@ require "delete_employee.php";
 
 <!-- pagination -->
 <?php 
-echo '<div class="pagination">';
-echo paginate_links( array(
-'base' => add_query_arg( 'cpage', '%#%' ),
-'format' => '',
-'prev_text' => __('&laquo;'),
-'next_text' => __('&raquo;'),
-'total' => ceil($total / $user_per_page),
-'current' => $page,
-'type' => 'list'
-));
-echo '</div>';
+// echo '<div class="pagination">';
+// echo paginate_links( array(
+// 'base' => add_query_arg( 'cpage', '%#%' ),
+// 'format' => '',
+// 'prev_text' => __('&laquo;'),
+// 'next_text' => __('&raquo;'),
+// 'total' => ceil($total / $user_per_page),
+// 'current' => $page,
+// 'type' => 'list'
+// ));
+// echo '</div>';
 ?>
 
 <style>  
-  .pagination{
+label select{
+  margin: 10px;
+  width: 50px !important
+}
+#table_id_wrapper{
+  width: 100%;
+  overflow: hidden;
+}
+  /* .pagination{
     float: right;
   }            
   .pagination a {   
@@ -99,8 +108,14 @@ echo '</div>';
   }  
   .page-numbers > li {
     display: inline-block;
-  }
+  } */
 </style>
+
+<script>
+  $(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>
 <?php 
   else : 
     echo 'No data is available in the database';
