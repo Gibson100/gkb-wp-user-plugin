@@ -114,5 +114,5 @@ imgInp.onchange = evt => {
 $('.closebtn').click(function(){
     window.location.replace('?page=list-users') // return the user back if they click cancel while editing a particular employee
 })
-        
+    
 </script>

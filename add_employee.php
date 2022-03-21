@@ -58,26 +58,26 @@ if ($_REQUEST['page'] === 'gkblabs-create-user'    && !empty($_REQUEST['fname'])
 <div">
 
 <h4 class="modal-title">Add a new Employee</h4>
-<form action="<?php $_PHP_SELF ?>" method="post" enctype="multipart/form-data">
+<form action="<?php $_PHP_SELF ?>" method="post" enctype="multipart/form-data" id="form">
     <div class="mb-3 mt-3">
-        <label for="name" class="form-label">First Name:</label>
+        <label for="name" class="form-label">First Name: <span class="error">*<span></label>
         <input type="text" class="form-control w-50" id="fname" placeholder="Enter First Name" name="fname"
+            min="2" required>
+    </div>
+    <div class="mb-3">
+        <label for="lname" class="form-label">Last Name: <span class="error">*<span></label>
+        <input type="text" class="form-control w-50" id="lname" placeholder="Enter Lastname" name="lname" min="2"
             required>
     </div>
     <div class="mb-3">
-        <label for="lname" class="form-label">Last Name:</label>
-        <input type="text" class="form-control w-50" id="lname" placeholder="Enter Lastname" name="lname"
-            required>
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email:</label>
+        <label for="email" class="form-label">Email: <span class="error">*<span></label>
         <input type="email" class="form-control w-50" id="email" placeholder="Enter Email" name="email"
             required>
     </div>
     Hobbies
-    <div class="form-check">
-        <input class="form-check-input mt-1" type="checkbox" id="check1" name="hobbies[]" value="TV">
-        <label class="form-check-label">TV</label>
+    <div class="form-check">TV
+        <input class="form-check-input mt-1" type="checkbox" id="check1" name="hobbies[]" value="TV" required>
+        <label class="form-check-label"></label>
     </div>
     <div class="form-check">
         <input class="form-check-input mt-1" type="checkbox" id="check1" name="hobbies[]" value="Reading">
@@ -92,14 +92,13 @@ if ($_REQUEST['page'] === 'gkblabs-create-user'    && !empty($_REQUEST['fname'])
         <label class="form-check-label">Skiing</label>
     </div>
     Gender
-    <div class="form-check">
-        <input type="radio" class="form-check-input mt-1" id="radio1" name="gender" value="Male"
-            checked>Male
-        <label class="form-check-label" for="radio1" required></label>
+    <div class="form-check">Male
+        <input type="radio" class="form-check-input mt-1" id="radio1" name="gender" value="Male">
+        <label class="form-check-label" for="radio1"></label>
     </div>
     <div class="form-check">
         <input type="radio" class="form-check-input mt-1" id="radio2" name="gender"
-            value="Female">Female
+            value="Female" required>Female
         <label class="form-check-label" for="radio2"></label>
     </div>
     <div class="mb-3">
@@ -113,6 +112,12 @@ if ($_REQUEST['page'] === 'gkblabs-create-user'    && !empty($_REQUEST['fname'])
 
 </div>
 
+<style>
+  .error{
+        color: red;
+    }
+</style>
+
 <script>
 imgInp.onchange = evt => {
     const [file] = imgInp.files
@@ -120,4 +125,56 @@ imgInp.onchange = evt => {
         blah.src = URL.createObjectURL(file)
     }
 }
+
+// input validation code in jquery
+$(document).ready(function () {
+
+$('#form').validate({ // initialize the plugin
+    rules: {
+        'hobbies[]': {
+            required: true,
+        },
+        'fname': {
+            required: true,
+            minlength: 2,
+            lettersonly: true,
+            maxlength: 255,
+        },
+        'lname': {
+            requied: true,
+            minlength: 2,
+            maxlength: 255,
+            lettersonly: true,
+        },
+        'email': {
+            required: true,
+            maxlength: 255,
+            minlength: 5,
+        },
+        'gender': {
+            required: true,
+        }
+    },
+    messages: {
+        'hobbies[]': {
+            required: "You must check at least 1 box",
+            maxlength: "Check no more than {0} boxes"
+        },
+        'gender': {
+            required: "Gender is required",
+        },
+        'fname': {
+            required: "First name is required",
+        },
+        'lname': {
+            required: "Last name is required",
+        },
+        'email': {
+            required: "email name is required",
+        }
+    }
+});
+
+});  
+
 </script>

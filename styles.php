@@ -26,5 +26,7 @@
 
  wp_enqueue_script( 'j-query-datatable-js', 'https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js' );
 
+ wp_enqueue_script( 'j-query-validator', 'https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js' );
+
 
     
