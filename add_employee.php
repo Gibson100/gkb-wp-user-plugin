@@ -158,7 +158,7 @@ rules: {
             required: "first name is required",
         },
         lname: {
-            required: "last name is reaquired",
+            required: "last name is required",
         },
         // add single quotes
         'hobbies[]': "You must check at least 1 box",
