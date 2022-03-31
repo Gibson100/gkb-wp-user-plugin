@@ -2,7 +2,7 @@
 
 if ($_REQUEST['page'] === 'import-users' && isset($_POST['submit']))
 {
-    $filename = $_FILES["uploadfile"]["tmp_name"];;
+    $filename = $_FILES["uploadfile"]["tmp_name"];
     $count = 0;
 
     if ($_FILES['uploadfile']['size'] > 0)
